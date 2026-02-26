@@ -6,6 +6,7 @@ export default {
       colors: {
         primary: "var(--primary)",
         secondary: "var(--secondary)",
+        headings: "var(--headings)",
         highlight: "var(--highlight)",
       },
       fontFamily: {

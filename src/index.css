@@ -2,14 +2,15 @@
 @tailwind components;
 @tailwind utilities;
 
-:root{
-  --primary: #1F5373;
-  --secondary: #3B8C84;
-  --highlight: #D94945;
+:root {
+  --primary: #1f5373;
+  --secondary: #3b8c84;
+  --headings: #2e3133;
+  --highlight: #d94945;
 }
 
 body {
-  font-family: 'Inter', sans-serif;
+  font-family: "Inter", sans-serif;
 }
 
 /* Fade-in animation */
@@ -27,25 +28,30 @@ body {
 }
 
 /* Staggered delays */
-.fade-in-delay-1 { animation-delay: 0.3s; }
-.fade-in-delay-2 { animation-delay: 0.6s; }
-.fade-in-delay-3 { animation-delay: 0.9s; }
-
+.fade-in-delay-1 {
+  animation-delay: 0.3s;
+}
+.fade-in-delay-2 {
+  animation-delay: 0.6s;
+}
+.fade-in-delay-3 {
+  animation-delay: 0.9s;
+}
 
 /* Pagination Dots */
 .swiper-pagination {
   position: absolute;
-  bottom: 24px;   
+  bottom: 24px;
   width: 100%;
   display: flex;
   justify-content: center;
-  z-index: 20; 
+  z-index: 20;
 }
 
 .swiper-pagination-bullet {
   width: 12px;
   height: 12px;
-  background-color: #555 !important; 
+  background-color: #555 !important;
   opacity: 1 !important;
   margin: 0 6px;
   border-radius: 50%;
@@ -53,5 +59,53 @@ body {
 }
 
 .swiper-pagination-bullet-active {
-  background-color: #222 !important; 
+  background-color: #222 !important;
+}
+/* Make sure wrapper allows outside arrows */
+.slider-div {
+  position: relative !important;
+  padding: 30px !important;
+  margin: 20px !important;
+}
+.swiper {
+  position: unset !important;
+}
+
+.slider-div .swiper-button-next,
+.slider-div .swiper-button-prev {
+  width: 34px;
+  height: 34px;
+  background-color: #edf1f2;
+  border-radius: 50%;
+  color: var(--headings) !important;
+  top: 50%;
+  font-size: 8px !important;
+}
+
+/* Smaller Arrow Icon */
+.slider-div .swiper-button-next::after,
+.slider-div .swiper-button-prev::after {
+  font-size: 8px !important;
+}
+
+.swiper-button-prev,
+.swiper-button-next {
+  svg {
+    width: 50% !important;
+    height: 50% !important;
+  }
+}
+.slider-div .swiper-button-prev {
+  left: -30px !important;
+}
+
+.slider-div .swiper-button-next {
+  right: -30px !important;
+}
+
+/* Optional Hover Effect */
+.slider-div .swiper-button-next:hover,
+.slider-div .swiper-button-prev:hover {
+  background-color: var(--primary);
+  color: white !important;
 }
