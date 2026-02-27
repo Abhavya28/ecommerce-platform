@@ -68,7 +68,7 @@ const Testimonials = () => {
     <section className="py-10 px-5 md:px-20">
       <div className="flex flex-col md:flex-row gap-4">
         {/* Featured Brands */}
-        <div className="relative px-5 py-10">
+        <div className="relative px-5 py-10 w-full md:w-1/2">
           <h2 className="text-3xl font-bold text-center">Featured Brands</h2>
           <div className="slider-div">
             <Swiper
@@ -103,28 +103,23 @@ const Testimonials = () => {
         </div>
 
         {/* Customer Reviews */}
-        <div className="relative px-5 py-10">
+        <div className="relative px-5 py-10 w-full md:w-1/2">
           <h2 className="text-3xl font-bold text-center">Customer Reviews</h2>
           <div className="slider-div">
             <Swiper
-              spaceBetween={2}
-              slidesPerView={2}
+              spaceBetween={20}
               navigation
-              modules={[Navigation]}
               loop={true}
-              autoHeight={false}
+              modules={[Navigation]}
               breakpoints={{
-                576: {
+                0: {
                   slidesPerView: 1,
-                  spaceBetween: 20,
                 },
                 768: {
                   slidesPerView: 2,
-                  spaceBetween: 10,
                 },
-                1024: {
+                1200: {
                   slidesPerView: 2,
-                  spaceBetween: 10,
                 },
               }}
             >
@@ -132,7 +127,7 @@ const Testimonials = () => {
                 <SwiperSlide key={item.id} className="flex h-auto">
                   <div
                     key={index}
-                    className="relative group glass rounded-2xl overflow-hidden transition-all duration-300 flex flex-col gap-8 bg-[#ECF6F5] p-12 hover:border-primary h-full"
+                    className="relative group glass rounded-2xl overflow-hidden transition-all duration-300 flex flex-col gap-8 bg-[#ECF6F5] p-6 md:p-8 hover:border-primary h-full"
                   >
                     <div className="flex flex-col gap-4 flex-1">
                       <h1 className="font-semibold text-xl">{item.title}</h1>
