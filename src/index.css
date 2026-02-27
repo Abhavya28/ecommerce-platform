@@ -65,7 +65,6 @@ body {
 .slider-div {
   position: relative !important;
   padding: 30px !important;
-  margin: 20px !important;
 }
 .swiper {
   position: unset !important;
@@ -80,6 +79,7 @@ body {
   color: var(--headings) !important;
   top: 50%;
   font-size: 8px !important;
+  visibility: visible !important;
 }
 
 /* Smaller Arrow Icon */
@@ -100,7 +100,7 @@ body {
 }
 
 .slider-div .swiper-button-next {
-  right: -30px !important;
+  right: -20px !important;
 }
 
 /* Optional Hover Effect */

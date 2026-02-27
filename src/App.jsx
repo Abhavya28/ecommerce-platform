@@ -5,6 +5,7 @@ import Featured from './sections/Featured'
 import Hero from './sections/Hero'
 import Newsletter from './sections/Newsletter'
 import PopularCategories from './sections/PopularCategories'
+import Testimonials from './sections/Testimonials'
 
 function App() {
 
@@ -16,6 +17,7 @@ function App() {
       <Featured />
       <Discounts />
       <Newsletter />
+      <Testimonials />
     </div>
   )
 }
