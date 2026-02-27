@@ -8,6 +8,7 @@ import Newsletter from './layouts/Newsletter'
 import PopularCategories from './sections/PopularCategories'
 import Testimonials from './sections/Testimonials'
 import Features from './sections/Features'
+import Footer from './layouts/Footer'
 
 function App() {
 
@@ -22,6 +23,7 @@ function App() {
       <Testimonials />
       <Follow />
       <Features />
+      <Footer />
     </div>
   )
 }
