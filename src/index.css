@@ -41,7 +41,7 @@ body {
 /* Pagination Dots */
 .swiper-pagination {
   position: absolute;
-  bottom: 24px;
+  bottom: px;
   width: 100%;
   display: flex;
   justify-content: center;
@@ -103,7 +103,6 @@ body {
   right: -20px !important;
 }
 
-/* Optional Hover Effect */
 .slider-div .swiper-button-next:hover,
 .slider-div .swiper-button-prev:hover {
   background-color: var(--primary);
