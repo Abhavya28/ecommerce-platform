@@ -17,8 +17,7 @@ import SpecialDeals from "../sections/SpecialDeals";
 const navLinks = [
   { id: "1", title: "Home", href: "/" },
   { id: "2", title: "Shop", href: "/shop" },
-  { id: "3", title: "Elements", href: "#" },
-  { id: "4", title: "Blog", href: "#" },
+  { id: "3", title: "Blog", href: "#" },
 ];
 
 const Navbar = () => {

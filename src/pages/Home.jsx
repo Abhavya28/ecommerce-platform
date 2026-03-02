@@ -15,7 +15,6 @@ const Home = () => {
       <PopularCategories />
       <Featured />
       <Discounts />
-      <Newsletter />
       <Testimonials />
       <Follow />
       <Features />

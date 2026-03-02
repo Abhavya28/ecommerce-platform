@@ -8,6 +8,7 @@ export default {
         secondary: "var(--secondary)",
         headings: "var(--headings)",
         highlight: "var(--highlight)",
+        lightgray:"var(--lightgray)",
       },
       fontFamily: {
         sans: ["Inter", "sans-serif"],
