@@ -12,10 +12,11 @@ import {
 } from "lucide-react";
 import { useEffect, useRef, useState } from "react";
 import Button from "../components/Button";
+import SpecialDeals from "../sections/SpecialDeals";
 
 const navLinks = [
-  { id: "1", title: "Home", href: "#" },
-  { id: "2", title: "Shop", href: "#" },
+  { id: "1", title: "Home", href: "/" },
+  { id: "2", title: "Shop", href: "/shop" },
   { id: "3", title: "Elements", href: "#" },
   { id: "4", title: "Blog", href: "#" },
 ];
@@ -23,6 +24,7 @@ const navLinks = [
 const Navbar = () => {
   const [open, setOpen] = useState(false);
   const [mobileMenu, setMobileMenu] = useState(false);
+  const [showDeals, setShowDeals] = useState(false);
   const dropdownRef = useRef(null);
 
   useEffect(() => {
@@ -184,7 +186,7 @@ const Navbar = () => {
           </div>
         </div>
       </nav>
-      
+
       {/* Fixed Navbar */}
       <div className="w-full sticky top-0 z-50 bg-primary px-4 md:px-10 py-4 flex flex-col">
         {/* Top Row */}
@@ -194,9 +196,23 @@ const Navbar = () => {
             {/* Desktop Menu */}
             <div className="hidden md:flex gap-10 text-white text-lg items-center">
               <div className="bg-highlight rounded-2xl flex gap-2 p-3 items-center justify-center">
-                <p>Special Deals</p>
-                <ChevronDown size={14} />
+                <button
+                  onClick={() => setShowDeals(!showDeals)}
+                  className="flex gap-2 items-center"
+                >
+                  <p>Special Deals</p>
+                  <ChevronDown size={14} />
+                </button>
               </div>
+
+              {showDeals && (
+                <div className="absolute top-full left-0 mt-2">
+                  <SpecialDeals
+                    showDeals={showDeals}
+                    setShowDeals={setShowDeals}
+                  />
+                </div>
+              )}
 
               <div className="flex gap-10 font-semibold">
                 {navLinks.map((item) => (
@@ -236,9 +252,23 @@ const Navbar = () => {
         {mobileMenu && (
           <div className="md:hidden w-full text-white text-lg font-semibold px-6 py-4 space-y-3 mt-3">
             <div className="flex justify-between items-center">
-              <p>Special Deals</p>
-              <ChevronDown size={14} />
+              <button
+                onClick={() => setShowDeals(!showDeals)}
+                className="flex gap-2 items-center"
+              >
+                <p>Special Deals</p>
+                <ChevronDown size={14} />
+              </button>
             </div>
+
+            {showDeals && (
+              <div className="absolute top-full left-0 mt-2">
+                <SpecialDeals
+                  showDeals={showDeals}
+                  setShowDeals={setShowDeals}
+                />
+              </div>
+            )}
 
             {navLinks.map((item) => (
               <a

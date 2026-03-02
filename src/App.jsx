@@ -1,31 +1,21 @@
-import './index.css'
-import Navbar from './layouts/Navbar'
-import Discounts from './sections/Discounts'
-import Featured from './sections/Featured'
-import Follow from './sections/Follow'
-import Hero from './sections/Hero'
-import Newsletter from './layouts/Newsletter'
-import PopularCategories from './sections/PopularCategories'
-import Testimonials from './sections/Testimonials'
-import Features from './sections/Features'
-import Footer from './layouts/Footer'
+import "./index.css";
+import { Routes, Route } from "react-router-dom";
+import Navbar from "./layouts/Navbar";
+import Footer from "./layouts/Footer";
+import Home from "./pages/Home";
+import Shop from "./pages/Shop";
 
 function App() {
-
   return (
-    <div>
+    <>
       <Navbar />
-      <Hero />
-      <PopularCategories />
-      <Featured />
-      <Discounts />
-      <Newsletter />
-      <Testimonials />
-      <Follow />
-      <Features />
+      <Routes>
+        <Route path="/" element={<Home />} />
+        <Route path="/shop" element={<Shop />} />
+      </Routes>
       <Footer />
-    </div>
-  )
+    </>
+  );
 }
 
-export default App
+export default App;
