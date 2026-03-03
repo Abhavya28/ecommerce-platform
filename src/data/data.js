@@ -397,27 +397,27 @@ const shopGrid = [
     },
     {
       id: "6",
-      category: "Mum & Baby",
-      name: "Holly Organic Natural Creme",
+      category: "Vitamins",
+      name: "Go Natural Vitamins & Pills",
       rating: "4",
-      price: "599",
-      img: "/images/featuredImgs/Creme.jpg",
+      price: "699",
+      img: "/images/featuredImgs/vitamins&pills.png",
     },
     {
       id: "7",
-      category: "Health & First Aids",
-      name: "AirPio Mucus Clearance & Lung",
+      category: "Skin Care",
+      name: "Minea Puch Bag for Skin",
       rating: "5",
-      price: "999",
-      img: "/images/featuredImgs/AirPio.jpg",
+      price: "499",
+      img: "/images/featuredImgs/puchbag.png",
     },
     {
       id: "8",
-      category: "Organic & Gluten Free",
-      name: "Vitaly Protein Slim & Trim",
-      rating: "4.5",
-      price: "299",
-      img: "/images/featuredImgs/Sachet.jpg",
+      category: "Bath & Body",
+      name: "Posken Intensive Moisturizer ",
+      rating: "3",
+      price: "349",
+      img: "/images/featuredImgs/moisture.png",
     },
     {
       id: "9",
@@ -517,7 +517,7 @@ const shopGrid = [
     },
     {
       id: "21",
-      category: "Mum & Baby",
+      category: "Skin Care",
       name: "Holly Organic Natural Creme",
       rating: "4",
       price: "599",
@@ -548,5 +548,6 @@ const shopGrid = [
       img: "/images/featuredImgs/NaturalCookie.jpg",
     },
 ];
+
 
 export { specialDeals, tabsData, shopGrid };

@@ -17,7 +17,7 @@ import SpecialDeals from "../sections/SpecialDeals";
 const navLinks = [
   { id: "1", title: "Home", href: "/" },
   { id: "2", title: "Shop", href: "/shop" },
-  { id: "3", title: "Blog", href: "#" },
+  { id: "3", title: "Blog", href: "/blogs" },
 ];
 
 const Navbar = () => {
@@ -117,7 +117,7 @@ const Navbar = () => {
                   </button>
 
                   {open && (
-                    <div className="absolute left-0  bg-white shadow-lg rounded-md w-44 max-h-60 overflow-y-auto z-20">
+                    <div className="absolute left-0  bg-white shadow-lg rounded-md w-44 max-h-60 overflow-y-auto z-50">
                       <ul className="py-2 text-sm">
                         {[
                           "Vitamins & Supplements",
@@ -187,7 +187,7 @@ const Navbar = () => {
       </nav>
 
       {/* Fixed Navbar */}
-      <div className="w-full sticky top-0 z-50 bg-primary px-4 md:px-10 py-4 flex flex-col">
+      <div className="w-full sticky top-0 z-40 bg-primary px-4 md:px-10 py-4 flex flex-col">
         {/* Top Row */}
         <div className="flex items-center justify-between w-full">
           {/* Left Side (Desktop Menu + Hamburger) */}

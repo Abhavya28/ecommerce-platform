@@ -47,7 +47,13 @@ const Shop = () => {
   }, [sortOpen]);
   return (
     <div className="">
-      <div className="bg-[#ECF6F5] px-4 py-6 md:px-20 md:py-10">
+      <div className="bg-[#ECF6F5] px-4 py-6 md:px-20 md:py-10 flex flex-col gap-4">
+        <p className="text-headings">
+          <a href="/" className="text-primary">
+            Home{" "}
+          </a>{" "}
+          /{" "}
+        </p>
         <h1 className="text-4xl text-headings font-semibold">Shop</h1>
       </div>
 
@@ -160,7 +166,7 @@ const Shop = () => {
                     src={item.img}
                     alt={item.name}
                     className={`w-full h-64 object-cover p-4"
-                    ${isList ? "w-72 h-72" : "w-full h-64"}`}
+                    ${isList ? "w-72 h-72 object-none" : "w-full h-64 "}`}
                   />
 
                   <div
@@ -183,7 +189,7 @@ const Shop = () => {
                     </div>
                   </div>
 
-                  <div className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-all duration-300 flex flex-col items-center justify-center gap-6">
+                  <div className="absolute inset-0 opacity-0 pointer-events-none group-hover:pointer-events-auto group-hover:opacity-100 transition-all duration-300 flex flex-col items-center justify-center gap-6">
                     <div className="relative flex flex-col gap-4 -right-20 -top-10 transform translate-x-20 opacity-0 group-hover:translate-x-0 group-hover:opacity-100 transition-all duration-500 ease-out">
                       <div className="rounded-full h-10 w-10 flex items-center justify-center bg-gray-300">
                         <ArrowRightLeft />
