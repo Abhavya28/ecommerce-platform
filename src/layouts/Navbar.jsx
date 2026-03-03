@@ -14,6 +14,10 @@ import { useEffect, useRef, useState } from "react";
 import Button from "../components/Button";
 import SpecialDeals from "../sections/SpecialDeals";
 
+import { useDispatch } from "react-redux";
+import { setSearchTerm, setSelectedCategory } from "../redux/filterSlice";
+import { useNavigate } from "react-router-dom";
+
 const navLinks = [
   { id: "1", title: "Home", href: "/" },
   { id: "2", title: "Shop", href: "/shop" },
@@ -24,6 +28,11 @@ const Navbar = () => {
   const [open, setOpen] = useState(false);
   const [mobileMenu, setMobileMenu] = useState(false);
   const [showDeals, setShowDeals] = useState(false);
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
+
+  const [search, setSearch] = useState("");
+  const [selectedCategory, setSelectedCategoryLocal] = useState("");
   const dropdownRef = useRef(null);
 
   useEffect(() => {
@@ -96,11 +105,23 @@ const Navbar = () => {
             />
 
             {/* Search Bar */}
-            <form className="w-full md:max-w-3xl md:mx-6 text-gray-600">
+            <form
+              className="w-full md:max-w-3xl md:mx-6 text-gray-600"
+              onSubmit={(e) => {
+                e.preventDefault();
+
+                dispatch(setSearchTerm(search));
+                dispatch(setSelectedCategory(selectedCategory));
+
+                navigate("/shop");
+              }}
+            >
               <div className="flex relative bg-white rounded-3xl shadow-sm">
                 {/* Input */}
                 <input
                   type="search"
+                  value={search}
+                  onChange={(e) => setSearch(e.target.value)}
                   placeholder="Search product"
                   className="w-full px-5 py-2 outline-none rounded-3xl"
                 />
@@ -112,7 +133,7 @@ const Navbar = () => {
                     onClick={() => setOpen(!open)}
                     className="w-full px-4 py-2 flex items-center justify-between border-x border-gray-200 text-sm"
                   >
-                    <p>All Categories</p>
+                    <p>{selectedCategory || "All Categories"}</p>
                     <ChevronDown size={16} />
                   </button>
 
@@ -120,23 +141,22 @@ const Navbar = () => {
                     <div className="absolute left-0  bg-white shadow-lg rounded-md w-44 max-h-60 overflow-y-auto z-50">
                       <ul className="py-2 text-sm">
                         {[
-                          "Vitamins & Supplements",
-                          "Personal Care & Beauty",
-                          "Medicines",
-                          "Health & First Aids",
-                          "Sexual Health",
-                          "Weight Loss & Fitness",
                           "Mum & Baby",
+                          "Health & First Aids",
                           "Organic & Gluten Free",
-                          "Home & Pets",
-                          "Travel",
-                          "Perfumes & Gifts",
+                          "Medicines",
+                          "Vitamins",
+                          "Skin Care",
+                          "Bath & Body",
                         ].map((item) => (
                           <li key={item}>
                             <button
                               type="button"
                               className="block w-full text-left px-4 py-2 hover:bg-gray-100"
-                              onClick={() => setOpen(false)}
+                              onClick={() => {
+                                setSelectedCategoryLocal(item);
+                                setOpen(false);
+                              }}
                             >
                               {item}
                             </button>

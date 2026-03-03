@@ -1,4 +1,5 @@
 import { useEffect, useRef, useState } from "react";
+import { useSelector } from "react-redux";
 import Button from "../components/Button";
 import {
   ArrowRightLeft,
@@ -15,12 +16,33 @@ import { shopGrid } from "../data/data";
 import { Rating, Slider } from "@mui/material";
 import ProductCategories from "../sections/ProductCategories";
 
+const categories = [
+  "Mum & Baby",
+  "Health & First Aids",
+  "Organic & Gluten Free",
+  "Medicines",
+  "Vitamins",
+  "Skin Care",
+  "Bath & Body",
+];
+
+const sortOptions = [
+  { label: "Price: Low to High", value: "low-high" },
+  { label: "Price: High to Low", value: "high-low" },
+  { label: "Most Rated", value: "rating" },
+];
+
 const Shop = () => {
   const [sortOpen, setSortOpen] = useState(false);
+  const [sortType, setSortType] = useState("");
   const [cols, setCols] = useState(4);
   const [value, setValue] = useState([0, 5000]);
+  const [selectedCategories, setSelectedCategories] = useState([]);
+  const [selectedRatings, setSelectedRatings] = useState([]);
   const isList = cols === 1;
   const dropdownRef = useRef(null);
+
+  const { searchTerm, selectedCategory } = useSelector((state) => state.filter);
 
   const handleChange = (event, newValue) => {
     setValue(newValue);
@@ -45,6 +67,63 @@ const Shop = () => {
       document.removeEventListener("mousedown", handleClickOutside);
     };
   }, [sortOpen]);
+
+  const handleCategoryChange = (category) => {
+    setSelectedCategories((prev) =>
+      prev.includes(category)
+        ? prev.filter((item) => item !== category)
+        : [...prev, category],
+    );
+  };
+
+  const handleRatingChange = (rating) => {
+    setSelectedRatings((prev) =>
+      prev.includes(rating)
+        ? prev.filter((item) => item !== rating)
+        : [...prev, rating],
+    );
+  };
+
+  const filteredProducts = shopGrid
+    .filter((product) => {
+      const matchesPrice =
+        product.price >= value[0] && product.price <= value[1];
+
+      const matchesCategory =
+        selectedCategories.length === 0 ||
+        selectedCategories.includes(product.category);
+
+      const matchesRating =
+        selectedRatings.length === 0 ||
+        selectedRatings.some((rating) => product.rating >= rating);
+
+      const matchesSearch =
+        searchTerm === "" ||
+        product.name.toLowerCase().includes(searchTerm.toLowerCase());
+
+      const matchesCategoryFromRedux =
+        selectedCategory === "" || product.category === selectedCategory;
+
+      return (
+        matchesCategory &&
+        matchesPrice &&
+        matchesRating &&
+        matchesSearch &&
+        matchesCategoryFromRedux
+      );
+    })
+    .sort((a, b) => {
+      if (sortType === "low-high") {
+        return a.price - b.price;
+      }
+      if (sortType === "high-low") {
+        return b.price - a.price;
+      }
+      if (sortType === "rating") {
+        return b.rating - a.rating;
+      }
+      return 0;
+    });
   return (
     <div className="">
       <div className="bg-[#ECF6F5] px-4 py-6 md:px-20 md:py-10 flex flex-col gap-4">
@@ -82,7 +161,7 @@ const Shop = () => {
           {/* Product Grid */}
           <div className="py-8">
             <div className="flex flex-col md:flex-row justify-between gap-4 text-lightgray">
-              <p>Showing 1-24 of 36 results</p>
+              <p>Showing {filteredProducts.length} of 24 results</p>
               {/* Buttons and Sort By*/}
               <div className="flex justify-between gap-6">
                 {/* Buttons */}
@@ -120,21 +199,30 @@ const Shop = () => {
                     onClick={() => setSortOpen(!sortOpen)}
                     className="w-full px-10 py-2 flex items-center justify-between border-2 border-lightgray rounded-2xl text-sm gap-2 text-lightgray"
                   >
-                    <p>Sort By</p>
+                    <p>
+                      {sortType
+                        ? sortOptions.find(
+                            (option) => option.value === sortType,
+                          )?.label
+                        : "Sort By"}
+                    </p>
                     <ChevronDown size={16} />
                   </button>
 
                   {sortOpen && (
                     <div className="absolute left-0 bg-white shadow-lg rounded-md w-44 max-h-60 overflow-y-auto z-20">
                       <ul className="py-2 text-sm">
-                        {["Option 1", "Option 2", "Option 3"].map((item) => (
-                          <li key={item}>
+                        {sortOptions.map((item) => (
+                          <li key={item.value}>
                             <button
                               type="button"
                               className="block w-full text-left px-4 py-2 hover:bg-gray-100"
-                              onClick={() => setSortOpen(false)}
+                              onClick={() => {
+                                setSortType(item.value);
+                                setSortOpen(false);
+                              }}
                             >
-                              {item}
+                              {item.label}
                             </button>
                           </li>
                         ))}
@@ -157,7 +245,7 @@ const Shop = () => {
                       : "grid-cols-1 sm:grid-cols-2 lg:grid-cols-4"
               }`}
             >
-              {shopGrid.map((item) => (
+              {filteredProducts.map((item) => (
                 <div
                   key={item.id}
                   className={`relative group glass overflow-hidden transition-all duration-300 border border-gray-200 p-6 h-full hover:border-primary ${isList ? "flex flex-row gap-8 items-center" : "flex flex-col gap-4"}`}
@@ -183,7 +271,7 @@ const Shop = () => {
                       <h1 className="text-2xl text-secondary font-bold">
                         Rs. {item.price}
                       </h1>
-                      <div className="rounded-full h-10 w-10 bg-gray-300 flex items-center justify-center hover:bg-primary group">
+                      <div className="rounded-full h-10 w-10 bg-gray-300 flex items-center justify-center group-hover:bg-primary group">
                         <ShoppingBag className="text-headings group-hover:text-white" />
                       </div>
                     </div>
@@ -234,96 +322,46 @@ const Shop = () => {
             </Button>
           </div>
 
-          {/* Brands */}
+          {/* Categories */}
           <div className="flex flex-col gap-4 items-start text-primary">
-            <h1 className="text-xl font-bold text-headings">Brands</h1>
-            <label className="flex items-center gap-2 cursor-pointer">
-              <input type="checkbox" className="w-6 h-6" />
-              <span className="text-primary font-semibold">
-                Alka Seltzer (5)
-              </span>
-            </label>
+            <h1 className="text-xl font-bold text-headings">Categories</h1>
 
-            <label className="flex items-center gap-2 cursor-pointer">
-              <input type="checkbox" className="w-6 h-6" />
-              <span className="text-primary font-semibold">Betavit (6)</span>
-            </label>
-
-            <label className="flex items-center gap-2 cursor-pointer">
-              <input type="checkbox" className="w-6 h-6" />
-              <span className="text-primary font-semibold">Cepacol (19)</span>
-            </label>
-
-            <label className="flex items-center gap-2 cursor-pointer">
-              <input type="checkbox" className="w-6 h-6" />
-              <span className="text-primary font-semibold">Cepacol (19)</span>
-            </label>
-
-            <label className="flex items-center gap-2 cursor-pointer">
-              <input type="checkbox" className="w-6 h-6" />
-              <span className="text-primary font-semibold">Cepacol (19)</span>
-            </label>
-
-            <label className="flex items-center gap-2 cursor-pointer">
-              <input type="checkbox" className="w-6 h-6" />
-              <span className="text-primary font-semibold">Cepacol (19)</span>
-            </label>
-
-            <label className="flex items-center gap-2 cursor-pointer">
-              <input type="checkbox" className="w-6 h-6" />
-              <span className="text-primary font-semibold">
-                Alka Seltzer (5)
-              </span>
-            </label>
-
-            <label className="flex items-center gap-2 cursor-pointer">
-              <input type="checkbox" className="w-6 h-6" />
-              <span className="text-primary font-semibold">Betavit (6)</span>
-            </label>
+            {categories.map((category) => (
+              <label
+                key={category}
+                className="flex items-center gap-2 cursor-pointer"
+              >
+                <input
+                  type="checkbox"
+                  className="w-6 h-6"
+                  checked={selectedCategories.includes(category)}
+                  onChange={() => handleCategoryChange(category)}
+                />
+                <span className="text-primary font-semibold">{category}</span>
+              </label>
+            ))}
           </div>
 
           {/* By Rating */}
           <div className="flex flex-col gap-4 items-start text-primary">
             <h1 className="text-xl font-bold text-headings">By Rating</h1>
-            <label className="flex items-center gap-2 cursor-pointer">
-              <input type="checkbox" className="w-6 h-6" />
-              <span className="text-headings text-sm  font-semibold flex items-end gap-2">
-                <Rating name="read-only" defaultValue={5} readOnly />
-                (8)
-              </span>
-            </label>
 
-            <label className="flex items-center gap-2 cursor-pointer">
-              <input type="checkbox" className="w-6 h-6" />
-              <span className="text-headings text-sm  font-semibold flex items-end gap-2">
-                <Rating name="read-only" defaultValue={4} readOnly />
-                (3)
-              </span>
-            </label>
-
-            <label className="flex items-center gap-2 cursor-pointer">
-              <input type="checkbox" className="w-6 h-6" />
-              <span className="text-headings text-sm  font-semibold flex items-end gap-2">
-                <Rating name="read-only" defaultValue={3} readOnly />
-                (1)
-              </span>
-            </label>
-
-            <label className="flex items-center gap-2 cursor-pointer">
-              <input type="checkbox" className="w-6 h-6" />
-              <span className="text-headings text-sm  font-semibold flex items-end gap-2">
-                <Rating name="read-only" defaultValue={2} readOnly />
-                (0)
-              </span>
-            </label>
-
-            <label className="flex items-center gap-2 cursor-pointer">
-              <input type="checkbox" className="w-6 h-6" />
-              <span className="text-headings text-sm  font-semibold flex items-end gap-2">
-                <Rating name="read-only" defaultValue={1} readOnly />
-                (2)
-              </span>
-            </label>
+            {[5, 4, 3, 2, 1].map((rating) => (
+              <label
+                key={rating}
+                className="flex items-center gap-2 cursor-pointer"
+              >
+                <input
+                  type="checkbox"
+                  className="w-6 h-6"
+                  checked={selectedRatings.includes(rating)}
+                  onChange={() => handleRatingChange(rating)}
+                />
+                <span className="text-headings text-sm font-semibold flex items-end gap-2">
+                  <Rating value={rating} readOnly />
+                </span>
+              </label>
+            ))}
           </div>
 
           {/* Availability */}
