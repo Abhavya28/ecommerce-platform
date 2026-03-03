@@ -15,8 +15,10 @@ import Button from "../components/Button";
 import SpecialDeals from "../sections/SpecialDeals";
 
 import { useDispatch } from "react-redux";
-import { setSearchTerm, setSelectedCategory } from "../redux/filterSlice";
 import { useNavigate } from "react-router-dom";
+
+import Suggestions from "../components/Suggestions";
+import { shopGrid } from "../data/data";
 
 const navLinks = [
   { id: "1", title: "Home", href: "/" },
@@ -28,28 +30,44 @@ const Navbar = () => {
   const [open, setOpen] = useState(false);
   const [mobileMenu, setMobileMenu] = useState(false);
   const [showDeals, setShowDeals] = useState(false);
+  const [suggestions, setSuggestions] = useState([]);
+  const [showSuggestions, setShowSuggestions] = useState(false);
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
   const [search, setSearch] = useState("");
-  const [selectedCategory, setSelectedCategoryLocal] = useState("");
-  const dropdownRef = useRef(null);
+  // const [selectedCategory, setSelectedCategoryLocal] = useState("");
+  // const dropdownRef = useRef(null);
+  const searchRef = useRef(null);
+
+  // useEffect(() => {
+  //   function handleClickOutside(event) {
+  //     if (dropdownRef.current && !dropdownRef.current.contains(event.target)) {
+  //       setOpen(false);
+  //     }
+  //   }
+
+  //   if (open) {
+  //     document.addEventListener("mousedown", handleClickOutside);
+  //   }
+
+  //   return () => {
+  //     document.removeEventListener("mousedown", handleClickOutside);
+  //   };
+  // }, [open]);
 
   useEffect(() => {
     function handleClickOutside(event) {
-      if (dropdownRef.current && !dropdownRef.current.contains(event.target)) {
-        setOpen(false);
+      if (searchRef.current && !searchRef.current.contains(event.target)) {
+        setShowSuggestions(false);
       }
     }
 
-    if (open) {
-      document.addEventListener("mousedown", handleClickOutside);
-    }
-
+    document.addEventListener("mousedown", handleClickOutside);
     return () => {
       document.removeEventListener("mousedown", handleClickOutside);
     };
-  }, [open]);
+  }, []);
 
   return (
     <>
@@ -109,25 +127,48 @@ const Navbar = () => {
               className="w-full md:max-w-3xl md:mx-6 text-gray-600"
               onSubmit={(e) => {
                 e.preventDefault();
-
-                dispatch(setSearchTerm(search));
-                dispatch(setSelectedCategory(selectedCategory));
-
+                dispatch(setSearch(search));
                 navigate("/shop");
               }}
             >
-              <div className="flex relative bg-white rounded-3xl shadow-sm">
+              <div
+                ref={searchRef}
+                className="flex relative bg-white rounded-3xl shadow-sm"
+              >
                 {/* Input */}
                 <input
                   type="search"
                   value={search}
-                  onChange={(e) => setSearch(e.target.value)}
+                  onChange={(e) => {
+                    const value = e.target.value;
+                    setSearch(value);
+                    if (value.trim() === "") {
+                      setSuggestions([]);
+                      setShowSuggestions(false);
+                      return;
+                    }
+                    const filtered = shopGrid
+                      .filter((item) =>
+                        item.name.toLowerCase().includes(value.toLowerCase()),
+                      )
+                      .slice(0, 5);
+                    setSuggestions(filtered);
+                    setShowSuggestions(true);
+                  }}
                   placeholder="Search product"
-                  className="w-full px-5 py-2 outline-none rounded-3xl"
+                  className="w-full px-5 py-4 outline-none rounded-3xl"
                 />
 
+                {showSuggestions && (
+                  <Suggestions
+                    suggestions={suggestions}
+                    setSearch={setSearch}
+                    setShowSuggestions={setShowSuggestions}
+                  />
+                )}
+
                 {/* Category Dropdown */}
-                <div ref={dropdownRef} className="relative">
+                {/* <div ref={dropdownRef} className="relative">
                   <button
                     type="button"
                     onClick={() => setOpen(!open)}
@@ -165,14 +206,14 @@ const Navbar = () => {
                       </ul>
                     </div>
                   )}
-                </div>
+                </div> */}
 
                 {/* Search Button */}
                 <button
                   type="submit"
-                  className="px-5 py-2 flex items-center justify-center"
+                  className="px-5 py-2 flex items-center justify-center border-l "
                 >
-                  <Search className="text-secondary" size={18} />
+                  <Search className="text-secondary" size={26} />
                 </button>
               </div>
             </form>

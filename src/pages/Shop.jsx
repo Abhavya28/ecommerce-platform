@@ -101,15 +101,11 @@ const Shop = () => {
         searchTerm === "" ||
         product.name.toLowerCase().includes(searchTerm.toLowerCase());
 
-      const matchesCategoryFromRedux =
-        selectedCategory === "" || product.category === selectedCategory;
-
       return (
         matchesCategory &&
         matchesPrice &&
         matchesRating &&
-        matchesSearch &&
-        matchesCategoryFromRedux
+        matchesSearch
       );
     })
     .sort((a, b) => {
@@ -124,6 +120,7 @@ const Shop = () => {
       }
       return 0;
     });
+    
   return (
     <div className="">
       <div className="bg-[#ECF6F5] px-4 py-6 md:px-20 md:py-10 flex flex-col gap-4">

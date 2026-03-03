@@ -47,7 +47,7 @@ export default function Blogs() {
           </a>{" "}
           /{" "}
         </p>
-        <h1 className="text-4xl text-headings font-semibold">Shop</h1>
+        <h1 className="text-4xl text-headings font-semibold">Blogs</h1>
       </div>
 
       <div className="flex flex-col md:flex-row px-4 py-6 md:px-20 md:py-10">
