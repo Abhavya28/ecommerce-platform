@@ -101,12 +101,7 @@ const Shop = () => {
         searchTerm === "" ||
         product.name.toLowerCase().includes(searchTerm.toLowerCase());
 
-      return (
-        matchesCategory &&
-        matchesPrice &&
-        matchesRating &&
-        matchesSearch
-      );
+      return matchesCategory && matchesPrice && matchesRating && matchesSearch;
     })
     .sort((a, b) => {
       if (sortType === "low-high") {
@@ -120,7 +115,7 @@ const Shop = () => {
       }
       return 0;
     });
-    
+
   return (
     <div className="">
       <div className="bg-[#ECF6F5] px-4 py-6 md:px-20 md:py-10 flex flex-col gap-4">

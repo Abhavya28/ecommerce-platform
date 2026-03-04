@@ -1,7 +1,7 @@
 import { ChevronRight, Search } from "lucide-react";
 import { useEffect, useState } from "react";
 import Button from "../components/Button";
-import {shopGrid } from "../data/data";
+import { shopGrid } from "../data/data";
 
 const NEWS_API_KEY = import.meta.env.VITE_NEWS_API_KEY;
 export default function Blogs() {
@@ -28,15 +28,15 @@ export default function Blogs() {
   }, []);
 
   if (loading) {
-  return (
-    <div className="fixed inset-0 flex items-center justify-center bg-black/30 backdrop-blur-sm z-50">
-      <div className="bg-white p-6 rounded-xl shadow-lg flex flex-col items-center gap-4">
-        <div className="w-10 h-10 border-4 border-blue-500 border-t-transparent rounded-full animate-spin"></div>
-        <p className="text-gray-700 font-medium">Loading news...</p>
+    return (
+      <div className="fixed inset-0 flex items-center justify-center bg-black/30 backdrop-blur-sm z-50">
+        <div className="bg-white p-6 rounded-xl shadow-lg flex flex-col items-center gap-4">
+          <div className="w-10 h-10 border-4 border-blue-500 border-t-transparent rounded-full animate-spin"></div>
+          <p className="text-gray-700 font-medium">Loading news...</p>
+        </div>
       </div>
-    </div>
-  );
-}
+    );
+  }
 
   return (
     <div>
@@ -222,14 +222,23 @@ export default function Blogs() {
               Recent Products
             </h1>
             <div className="flex flex-col gap-6">
-              {shopGrid.slice(0,3).map((item) => (
-                <div key={item.id} className="flex items-center gap-4 cursor-pointer">
-                    <img src={item.img} alt={item.name} className="h-24 w-22"/>
-                    <div>
-                        <p className="text-lightgray text-sm font-semibold">{item.category}</p>
-                        <h1 className="text-primary text-xl font-bold hover:text-blue-900">{item.name}</h1>
-                        <p className="text-secondary font-semibold">Rs. {item.price}</p>
-                    </div>
+              {shopGrid.slice(0, 3).map((item) => (
+                <div
+                  key={item.id}
+                  className="flex items-center gap-4 cursor-pointer"
+                >
+                  <img src={item.img} alt={item.name} className="h-24 w-22" />
+                  <div>
+                    <p className="text-lightgray text-sm font-semibold">
+                      {item.category}
+                    </p>
+                    <h1 className="text-primary text-xl font-bold hover:text-blue-900">
+                      {item.name}
+                    </h1>
+                    <p className="text-secondary font-semibold">
+                      Rs. {item.price}
+                    </p>
+                  </div>
                 </div>
               ))}
             </div>
