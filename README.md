@@ -2,11 +2,6 @@
 
 ![Hero Image](https://user-images.githubusercontent.com/YourUsername/demo-hero.png)  
 
-[![React](https://img.shields.io/badge/React-18.2.0-blue?style=for-the-badge&logo=react)](https://reactjs.org/) 
-[![TailwindCSS](https://img.shields.io/badge/TailwindCSS-3.3.3-blueviolet?style=for-the-badge&logo=tailwind-css)](https://tailwindcss.com/) 
-[![Vite](https://img.shields.io/badge/Vite-5.3.0-brightgreen?style=for-the-badge&logo=vite)](https://vitejs.dev/) 
-[![License](https://img.shields.io/badge/License-MIT-pink?style=for-the-badge)](LICENSE)
-
 ---
 
 ## 💻 Overview
