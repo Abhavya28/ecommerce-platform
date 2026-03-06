@@ -39,5 +39,5 @@ Designed to be **smooth, user-friendly, and fully responsive** for desktop and m
 
 ## 🎨 Screenshots / GIF
 
-![Home Page](/screenshots/home.png)
+![Home Page](/screenshots/Home.png)
 ---
