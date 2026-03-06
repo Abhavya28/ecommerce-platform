@@ -39,10 +39,5 @@ Designed to be **smooth, user-friendly, and fully responsive** for desktop and m
 
 ## 🎨 Screenshots / GIF
 
-![Home Page](https://user-images.githubusercontent.com/YourUsername/demo-screenshot.png)  
-*Home page with featured products and search bar*
-
-![Search Suggestions](https://user-images.githubusercontent.com/YourUsername/demo-suggestions.gif)  
-*Instant product suggestions while typing*
-
+![Home Page](/screenshots/home.png)
 ---
