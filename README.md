@@ -11,11 +11,6 @@ Designed to be **smooth, user-friendly, and fully responsive** for desktop and m
 
 ---
 
-## 🚀 Live Demo
-[🌐 Visit the Demo](https://your-demo-link.com)
-
----
-
 ## ✨ Features
 
 | Feature | Description |
