@@ -1,6 +1,4 @@
-# 🌿 EcoCommerce – Modern E-Commerce Platform
-
-![Hero Image](https://user-images.githubusercontent.com/YourUsername/demo-hero.png)  
+# 🌿 EcoCommerce – Modern E-Commerce Platform  
 
 ---
 
