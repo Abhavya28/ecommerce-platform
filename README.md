@@ -13,14 +13,14 @@ Designed to be **smooth, user-friendly, and fully responsive** for desktop and m
 
 | Feature | Description |
 |---------|-------------|
-| 🔍 Instant Search | Search products with live suggestions dropdown |
-| 🛒 Cart & Wishlist | Add to cart or wishlist quickly and easily |
-| 🎁 Special Deals | Highlight top deals and discounts dynamically |
-| 📱 Responsive Design | Works seamlessly on mobile, tablet, and desktop |
-| 🎨 Smooth Animations | Subtle hover effects for modern UX |
-| ⚡ Fast Performance | Optimized with Vite for instant loading |
-| 🗂 State Management | React + Redux integration for smooth flow |
-| 🧭 Navigation | React Router powered pages and sections |
+| Instant Search | Search products with live suggestions dropdown |
+| Cart & Wishlist | Add to cart or wishlist quickly and easily |
+| Special Deals | Highlight top deals and discounts dynamically |
+| Responsive Design | Works seamlessly on mobile, tablet, and desktop |
+| Smooth Animations | Subtle hover effects for modern UX |
+| Fast Performance | Optimized with Vite for instant loading |
+| State Management | React + Redux integration for smooth flow |
+| Navigation | React Router powered pages and sections |
 
 ---
 
